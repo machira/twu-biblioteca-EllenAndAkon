@@ -17,13 +17,15 @@ public class Biblioteca {
     }
 
     public void start() {
-        printStream.println("Welcome to Biblioteca! Here is a list of all library books:");
-        printStream.println("");
+        printStream.println("Welcome to Biblioteca!");
+        printStream.println("MAIN MENU");
         displayMenu();
     }
 
     private void displayMenu() {
-        printStream.println("List Books");
+        printStream.println("- List Books\n");
+
+        printStream.println("Enter your selection");
 
     }
 
@@ -31,5 +33,12 @@ public class Biblioteca {
         for (Book book : books)
             printStream.println(book.details());
         printStream.println("");
+    }
+
+    public void selectOption(String selection) {
+        printStream.println("That's not a valid option");
+        if (selection.contains("list books")) {
+            listBooks();
+        }
     }
 }

@@ -7,9 +7,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.contains;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by egalperi on 6/16/15.
@@ -31,7 +29,7 @@ public class BibliotecaTest {
 
         biblioteca.start();
 
-        verify(printStream).println("Welcome to Biblioteca! Here is a list of all library books:");
+        verify(printStream).println("Welcome to Biblioteca!");
 
     }
 
@@ -65,8 +63,27 @@ public class BibliotecaTest {
         biblioteca.start();
 
         verify(printStream).println(contains("List Books"));
+    }
 
+    @Test
+    public void shouldAskForUserInputWhenMenuIsShown() {
+        biblioteca.start();
+        verify(printStream).println("Enter your selection");
+    }
 
+    @Test
+    public void shouldHandleInvalidUserInput() {
+        biblioteca.start();
+        biblioteca.selectOption("boo");
+        verify(printStream).println("That's not a valid option");
+    }
+
+    @Test
+    public void shouldHandleValidUserInput(){
+        Biblioteca spy = spy(biblioteca);
+        spy.start();
+        spy.selectOption("list books");
+        verify(spy).listBooks();
     }
 
 }
