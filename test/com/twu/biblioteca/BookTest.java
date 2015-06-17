@@ -29,21 +29,6 @@ public class BookTest {
     }
 
     @Test
-    public void testBookHasTitle() {
-        assertEquals(book.getTitle(), title);
-    }
-
-    @Test
-    public void shouldHaveAnAuthor() {
-        assertEquals(book.getAuthor(), author);
-    }
-
-    @Test
-    public void shouldHaveAYearPublished() {
-        assertEquals(book.getYearPublished(), yearPublished);
-    }
-
-    @Test
     public void shouldPrintDetails() {
         PrintStream printStream = mock(PrintStream.class);
         book.printDetails(printStream);

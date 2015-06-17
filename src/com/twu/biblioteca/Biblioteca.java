@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,22 +18,6 @@ public class Biblioteca {
         this.books = books;
     }
 
-    public void start() {
-        printStream.println("Welcome to Biblioteca!");
-        printStream.println("MAIN MENU");
-        displayMenu();
-    }
-
-    private void displayMenu() {
-        printStream.println("- List Books\n");
-
-        printStream.println("Enter your selection");
-        Scanner scanner = new Scanner (System.in);
-//        String userSelection = scanner.nextLine();
-//        selectOption(userSelection);
-
-    }
-
     public void listBooks() {
         for (Book book : books) {
             book.printDetails(printStream);
@@ -40,12 +25,5 @@ public class Biblioteca {
         printStream.println("");
     }
 
-    public void selectOption(String selection) {
-        if (selection.toLowerCase().contains("list books")) {
-            listBooks();
-        }else{
-            printStream.println("That's not a valid option");
-            displayMenu();
-        }
-    }
+
 }

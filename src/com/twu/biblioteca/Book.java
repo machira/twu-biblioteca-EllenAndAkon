@@ -16,18 +16,6 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
-    public String getTitle() {
-        return name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getYearPublished() {
-        return yearPublished;
-    }
-
     public void printDetails(PrintStream printStream) {
         printStream.format("%20s %20s %20s\n", name, author, yearPublished);
     }
