@@ -24,7 +24,7 @@ public class Biblioteca {
 
     public void listBooks() {
         for (Book book : books)
-            printStream.println(book.getTitle());
+            printStream.println(book.details());
         printStream.println("");
     }
 }

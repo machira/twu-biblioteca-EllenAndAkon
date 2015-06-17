@@ -46,17 +46,17 @@ public class BibliotecaTest {
         books.add(new Book("Harry Potter", "JK Rowling", "10"));
         biblioteca.listBooks();
 
-        verify(printStream).println("Harry Potter");
+        verify(printStream).println("Harry Potter - JK Rowling - 10");
     }
 
     @Test
     public void shouldPrintAllBooksWhenThereAreMoreThanOneBook() {
-        books.add(new Book("Harry Potter", "", "10"));
+        books.add(new Book("Harry Potter", "JK Rowling", "10"));
         books.add(new Book("Lord of the Rings", "", "10"));
         biblioteca.listBooks();
 
-        verify(printStream).println("Harry Potter");
-        verify(printStream).println("Lord of the Rings");
+        verify(printStream).println("Harry Potter - JK Rowling - 10");
+        verify(printStream).println("Lord of the Rings -  - 10");
     }
 }
 
