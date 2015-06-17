@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.contains;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -58,6 +59,16 @@ public class BibliotecaTest {
         verify(printStream).println("Harry Potter - JK Rowling - 10");
         verify(printStream).println("Lord of the Rings -  - 10");
     }
+
+    @Test
+    public void shouldDisplayMenuOnStart(){
+        biblioteca.start();
+
+        verify(printStream).println(contains("List Books"));
+
+
+    }
+
 }
 
 
