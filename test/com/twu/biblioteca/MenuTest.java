@@ -1,17 +1,16 @@
-import com.sun.tools.internal.xjc.reader.dtd.bindinfo.BIAttribute;
-import com.twu.biblioteca.Biblioteca;
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.Menu;
+package com.twu.biblioteca;
+
+
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.*;
 
@@ -25,40 +24,27 @@ public class MenuTest {
     private Biblioteca biblioteca;
     private List<Book> books;
     private Menu menu;
+    private BibliotecaApp bibliotecaApp;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException{
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
         books = new ArrayList<Book>();
         biblioteca = mock(Biblioteca.class);
         menu = new Menu(printStream, biblioteca, reader);
-    }
-
-    @Test
-    public void testWelcomeMessagePrints() throws IOException {
-        when(reader.readLine()).thenReturn("foo");
-        menu.start();
-        verify(printStream).println("Welcome to Biblioteca!");
-
-    }
-
-    @Test
-    public void shouldDisplayMenuOnStart(){
-        menu.start();
-
-        verify(printStream).println(contains("MAIN MENU"));
+        when(reader.readLine()).thenReturn("list books");
+        bibliotecaApp = mock(BibliotecaApp.class);
     }
 
     @Test
     public void shouldAskForUserInputWhenMenuIsShown() {
-        menu.start();
+        menu.displayMenu();
         verify(printStream).println("Enter your selection");
     }
 
     @Test
     public void shouldHandleInvalidUserInput() {
-        menu.start();
         menu.selectOption("boo");
         verify(printStream).println("That's not a valid option");
     }
@@ -67,6 +53,18 @@ public class MenuTest {
     public void shouldHandleValidUserInput(){
         menu.selectOption("LISt books");
         verify(biblioteca).listBooks();
+    }
+
+    @Test
+    public void shouldIncludeQuitInMenuOption(){
+        menu.displayMenu();
+        verify(printStream).println(contains("Quit"));
+    }
+
+    @Test
+    public void shouldQuitApplicationWhenQuitIsSelected(){
+        menu.selectOption("Quit");
+        assertFalse(menu.stillAlive);
     }
 
 }

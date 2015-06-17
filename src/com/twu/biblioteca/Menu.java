@@ -11,21 +11,20 @@ public class Menu {
     private Biblioteca biblioteca;
     private BufferedReader reader;
     private PrintStream printStream;
+    public boolean stillAlive;
 
     public Menu(PrintStream printStream, Biblioteca biblioteca, BufferedReader reader){
         this.printStream = printStream;
         this.biblioteca = biblioteca;
         this.reader = reader;
+        stillAlive = true;
     }
 
-    public void start() {
-        printStream.println("Welcome to Biblioteca!");
-        printStream.println("MAIN MENU");
-        displayMenu();
-    }
+
 
     public void displayMenu() {
-        printStream.println("- List Books\n");
+        printStream.println("- List Books");
+        printStream.println("- Quit");
 
         printStream.println("Enter your selection");
         try {
@@ -41,7 +40,11 @@ public class Menu {
     public void selectOption(String selection) {
         if (selection.toLowerCase().contains("list books")) {
             biblioteca.listBooks();
-        }else{
+        }
+        else if (selection.toLowerCase().contains("quit")) {
+            stillAlive = false;
+        }
+        else{
             printStream.println("That's not a valid option");
             displayMenu();
         }
