@@ -82,9 +82,10 @@ public class BibliotecaTest {
     public void shouldHandleValidUserInput(){
         Biblioteca spy = spy(biblioteca);
         spy.start();
-        spy.selectOption("list books");
+        spy.selectOption("LISt books");
         verify(spy).listBooks();
     }
+
 
 }
 
