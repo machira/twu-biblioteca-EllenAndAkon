@@ -28,14 +28,15 @@ public class Biblioteca {
 
         printStream.println("Enter your selection");
         Scanner scanner = new Scanner (System.in);
-        String userSelection = scanner.nextLine();
-        selectOption(userSelection);
+//        String userSelection = scanner.nextLine();
+//        selectOption(userSelection);
 
     }
 
     public void listBooks() {
-        for (Book book : books)
-            printStream.println(book.details());
+        for (Book book : books) {
+            book.printDetails(printStream);
+        }
         printStream.println("");
     }
 

@@ -3,7 +3,15 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.PrintStream;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.contains;
+import static org.mockito.Mockito.verify;
 
 public class BookTest {
 
@@ -36,8 +44,10 @@ public class BookTest {
     }
 
     @Test
-    public void shouldHaveDetails() {
-        assertEquals(book.details(), "Book Title - Author - 2000");
+    public void shouldPrintDetails() {
+        PrintStream printStream = mock(PrintStream.class);
+        book.printDetails(printStream);
+        verify(printStream).format(anyString(), eq(title), eq(author), eq(yearPublished));
     }
 
 }

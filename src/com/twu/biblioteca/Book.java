@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
+
 /**
  * Created by egalperi on 6/16/15.
  */
@@ -26,7 +28,7 @@ public class Book {
         return yearPublished;
     }
 
-    public String details() {
-        return name + " - " + author + " - " + yearPublished;
+    public void printDetails(PrintStream printStream) {
+        printStream.format("%20s %20s %20s\n", name, author, yearPublished);
     }
 }

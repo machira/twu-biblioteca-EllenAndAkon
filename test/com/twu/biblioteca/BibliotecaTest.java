@@ -16,12 +16,16 @@ public class BibliotecaTest {
     private PrintStream printStream;
     private Biblioteca biblioteca;
     private List<Book> books;
+    private Book book1, book2, book3;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         books = new ArrayList<Book>();
         biblioteca = new Biblioteca(printStream, books);
+        book1 = mock(Book.class);
+        book2 = mock(Book.class);
+        book3 = mock(Book.class);
     }
 
     @Test
@@ -42,27 +46,29 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintOneBookWhenThereIsOneBook() {
-        books.add(new Book("Harry Potter", "JK Rowling", "10"));
+        books.add(book1);
         biblioteca.listBooks();
 
-        verify(printStream).println("Harry Potter - JK Rowling - 10");
+        verify(printStream).println(anyString());
     }
 
     @Test
     public void shouldPrintAllBooksWhenThereAreMoreThanOneBook() {
-        books.add(new Book("Harry Potter", "JK Rowling", "10"));
-        books.add(new Book("Lord of the Rings", "", "10"));
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
         biblioteca.listBooks();
 
-        verify(printStream).println("Harry Potter - JK Rowling - 10");
-        verify(printStream).println("Lord of the Rings -  - 10");
+        verify(printStream).println(anyString());
+        verify(printStream).println(anyString());
+        verify(printStream).println(anyString());
     }
 
     @Test
     public void shouldDisplayMenuOnStart(){
         biblioteca.start();
 
-        verify(printStream).println(contains("List Books"));
+        verify(printStream).println(contains("MAIN MENU"));
     }
 
     @Test
