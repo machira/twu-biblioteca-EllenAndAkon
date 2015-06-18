@@ -26,4 +26,7 @@ public class Biblioteca {
     }
 
 
+    public void checkout(Book book) {
+        book.checkOut();
+    }
 }

@@ -35,7 +35,6 @@ public class BibliotecaTest {
     }
 
 
-
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
         biblioteca.listBooks();
@@ -63,7 +62,14 @@ public class BibliotecaTest {
         verify(printStream).println(anyString());
     }
 
+    @Test
+    public void shouldNotIncludeCheckedOutBooksInList() {
+        books.add(book1);
+        biblioteca.checkout(book1);
+        biblioteca.listBooks();
 
+        verify(printStream, never()).format(contains(book1.title()));
+    }
 
 }
 
