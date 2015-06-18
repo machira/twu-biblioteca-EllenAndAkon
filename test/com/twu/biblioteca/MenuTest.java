@@ -25,16 +25,17 @@ public class MenuTest {
     private List<Book> books;
     private Menu menu;
     private BibliotecaApp bibliotecaApp;
+    private String bookTitle;
 
     @Before
     public void setUp() throws IOException{
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        books = new ArrayList<Book>();
         biblioteca = mock(Biblioteca.class);
         menu = new Menu(printStream, biblioteca, reader);
         when(reader.readLine()).thenReturn("list books");
         bibliotecaApp = mock(BibliotecaApp.class);
+        bookTitle = "Akon's Thesis";
     }
 
     @Test
@@ -59,6 +60,32 @@ public class MenuTest {
     public void shouldIncludeQuitInMenuOption(){
         menu.displayMenu();
         verify(printStream).println(contains("Quit"));
+    }
+
+    @Test
+    public void shouldIncludeCheckoutInMenuOption(){
+        menu.displayMenu();
+        verify(printStream).println(contains("Checkout"));
+    }
+
+    @Test
+    public void shouldCheckoutBookWithGivenTitle(){
+        menu.selectOption("checKout " + bookTitle);
+        verify(biblioteca).checkout(bookTitle.toLowerCase());
+    }
+
+    @Test
+    public void shouldLetUserKnowWhenCheckoutFails(){
+        when(biblioteca.checkout(bookTitle)).thenReturn(false);
+        menu.selectOption("checKout " + bookTitle);
+        verify(printStream).println("Could not check out book with that title.");
+    }
+
+    @Test
+    public void shouldLetUserKnowWhenCheckoutIsSuccessful(){
+        when(biblioteca.checkout(bookTitle.toLowerCase())).thenReturn(true);
+        menu.selectOption("checKout " + bookTitle);
+        verify(printStream).println(contains("Success"));
     }
 
     @Test

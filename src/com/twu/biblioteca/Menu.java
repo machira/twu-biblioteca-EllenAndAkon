@@ -25,7 +25,7 @@ public class Menu {
     public void displayMenu() {
         printStream.println("- List Books");
         printStream.println("- Quit");
-
+        printStream.println("- Checkout [book title]");
         printStream.println("Enter your selection");
         try {
             String userSelection = reader.readLine();
@@ -38,10 +38,19 @@ public class Menu {
     }
 
     public void selectOption(String selection) {
-        if (selection.toLowerCase().contains("list books")) {
+        selection = selection.toLowerCase();
+        if (selection.contains("list books")) {
             biblioteca.listBooks();
         }
-        else if (selection.toLowerCase().contains("quit")) {
+        else if (selection.contains("checkout")){
+            boolean checkout = biblioteca.checkout(selection.replace("checkout","").trim());
+            if(checkout){
+                printStream.println("Success! Enjoy your book.");
+            }else{
+                printStream.println("Could not check out book with that title.");
+            }
+        }
+        else if (selection.contains("quit")) {
             stillAlive = false;
         }
         else{

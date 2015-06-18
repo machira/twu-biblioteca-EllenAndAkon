@@ -20,13 +20,28 @@ public class Biblioteca {
 
     public void listBooks() {
         for (Book book : books) {
-            book.printDetails(printStream);
+            if (!book.isCheckedOut()) {
+                book.printDetails(printStream);
+            }
         }
         printStream.println("");
     }
 
 
-    public void checkout(Book book) {
+    public boolean checkout(Book book) {
+        if(book.isCheckedOut()){
+            return false;
+        }
         book.checkOut();
+        return true;
+    }
+
+    public boolean checkout(String bookTitle){
+        for(Book book: books){
+            if(book.title().equalsIgnoreCase(bookTitle)){
+                return checkout(book);
+            }
+        }
+        return false;
     }
 }

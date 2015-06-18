@@ -11,6 +11,8 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
@@ -30,8 +32,12 @@ public class BibliotecaTest {
         reader = mock(BufferedReader.class);
         biblioteca = new Biblioteca(printStream, books);
         book1 = mock(Book.class);
+        when(book1.title()).thenReturn("Book 1");
         book2 = mock(Book.class);
+        when(book2.title()).thenReturn("Book 2");
         book3 = mock(Book.class);
+        when(book3.title()).thenReturn("Book 3");
+
     }
 
 
@@ -64,11 +70,29 @@ public class BibliotecaTest {
 
     @Test
     public void shouldNotIncludeCheckedOutBooksInList() {
-        books.add(book1);
-        biblioteca.checkout(book1);
+        Book book4 = new Book("Akon's thesis", "Akon", "4000");
+        Book book5 = new Book("Conversations on String Theory", "Raymond", "1991");
+        books.add(book4);
+        books.add(book5);
+        biblioteca.checkout(book4);
         biblioteca.listBooks();
 
-        verify(printStream, never()).format(contains(book1.title()));
+        verify(printStream, never()).format(anyString(), eq("Akon's thesis"), eq("Akon"), eq("4000"));
+    }
+
+    @Test
+    public void shouldReturnFalseIfBookIsAlreadyCheckedOut() {
+        Book book4 = new Book("Akon's thesis", "Akon", "4000");
+        books.add(book4);
+        book4.checkOut();
+        assertFalse(biblioteca.checkout(book4));
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookIsNotAlreadyCheckedOut() {
+        Book book4 = new Book("Akon's thesis", "Akon", "4000");
+        books.add(book4);
+        assertTrue(biblioteca.checkout(book4));
     }
 
 }
