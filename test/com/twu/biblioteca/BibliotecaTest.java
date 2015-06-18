@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,8 +12,9 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
+//import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.*;
+//import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
@@ -93,6 +95,14 @@ public class BibliotecaTest {
         Book book4 = new Book("Akon's thesis", "Akon", "4000");
         books.add(book4);
         assertTrue(biblioteca.checkout(book4));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnBooks(){
+        when(book1.checkIn()).thenReturn(true);
+        when(book2.checkIn()).thenReturn(false);
+        assertEquals(biblioteca.returnBook(book1), true);
+        assertFalse(biblioteca.returnBook(book2));
     }
 
 }

@@ -7,15 +7,11 @@ import java.util.ArrayList;
 
 public class BibliotecaApp {
 
-    private BufferedReader reader;
-    private Biblioteca biblioteca;
     private Menu menu;
     private PrintStream printStream;
 
-    public BibliotecaApp(BufferedReader reader, PrintStream printStream, Biblioteca biblioteca, Menu menu) {
-        this.reader = reader;
+    public BibliotecaApp(PrintStream printStream, Menu menu) {
         this.printStream = printStream;
-        this.biblioteca = biblioteca;
         this.menu = menu;
     }
 
@@ -31,15 +27,13 @@ public class BibliotecaApp {
         Biblioteca biblioteca = new Biblioteca(printStream, books);
 
         Menu menu = new Menu(System.out, biblioteca, reader);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(reader, printStream, biblioteca, menu);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(printStream, menu);
 
         bibliotecaApp.start();
     }
 
     public void start() {
-
         printStream.println("Welcome to Biblioteca!");
-        printStream.println("MAIN MENU");
         while (menu.stillAlive) {
             menu.displayMenu();
         }

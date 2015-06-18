@@ -23,9 +23,11 @@ public class Menu {
 
 
     public void displayMenu() {
+        printStream.println("MAIN MENU");
         printStream.println("- List Books");
         printStream.println("- Quit");
         printStream.println("- Checkout [book title]");
+        printStream.println("- Return [book title]");
         printStream.println("Enter your selection");
         try {
             String userSelection = reader.readLine();
@@ -44,10 +46,18 @@ public class Menu {
         }
         else if (selection.contains("checkout")){
             boolean checkout = biblioteca.checkout(selection.replace("checkout","").trim());
-            if(checkout){
+            if(checkout) {
                 printStream.println("Success! Enjoy your book.");
             }else{
                 printStream.println("Could not check out book with that title.");
+            }
+        }
+        else if (selection.contains("return")) {
+            boolean bool = biblioteca.returnBook(selection.replace("return","").trim());
+            if(bool){
+                printStream.println("You have successfully returned this book");
+            }else{
+                printStream.println("Sorry, could not return that book.");
             }
         }
         else if (selection.contains("quit")) {

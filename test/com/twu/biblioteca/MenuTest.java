@@ -63,9 +63,15 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldIncludeCheckoutInMenuOption(){
+    public void shouldIncludeReturnBookInMenuOption(){
         menu.displayMenu();
-        verify(printStream).println(contains("Checkout"));
+        verify(printStream).println(contains("Return"));
+    }
+
+    @Test
+    public void shouldReturnBookWithGivenTitle(){
+        menu.selectOption("return " + bookTitle);
+        verify(biblioteca).returnBook(bookTitle.toLowerCase());
     }
 
     @Test
@@ -94,4 +100,17 @@ public class MenuTest {
         assertFalse(menu.stillAlive);
     }
 
+    @Test
+    public void shouldLetUserKnowReturnisSuccessful(){
+        when(biblioteca.returnBook(bookTitle.toLowerCase())).thenReturn(true);
+        menu.selectOption("return " + bookTitle);
+        verify(printStream).println(contains("success"));
+    }
+
+    @Test
+    public void shouldLetUserKnowReturnisUnsuccessful(){
+        when(biblioteca.returnBook(bookTitle.toLowerCase())).thenReturn(false);
+        menu.selectOption("return " + bookTitle);
+        verify(printStream).println(contains("not return"));
+    }
 }

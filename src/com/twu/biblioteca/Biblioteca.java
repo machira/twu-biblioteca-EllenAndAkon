@@ -44,4 +44,17 @@ public class Biblioteca {
         }
         return false;
     }
+
+    public boolean returnBook(Book book) {
+        return book.checkIn();
+    }
+
+    public boolean returnBook(String bookTitle) {
+        for (Book book : books) {
+            if (book.title().equalsIgnoreCase(bookTitle)) {
+                return returnBook(book);
+            }
+        }
+        return false;
+    }
 }

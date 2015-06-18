@@ -42,4 +42,10 @@ public class BookTest {
         assertTrue(book.isCheckedOut());
     }
 
+    @Test
+    public void shouldReturnTrueWhenReturned() {
+        book.checkOut();
+        assertTrue(book.checkIn());
+    }
+
 }

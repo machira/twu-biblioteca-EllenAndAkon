@@ -32,7 +32,7 @@ public class BibliotecaAppTest {
         biblioteca = mock(Biblioteca.class);
         menu = mock(Menu.class);
         when(reader.readLine()).thenReturn("list books");
-        bibliotecaApp = new BibliotecaApp(reader, printStream, biblioteca, menu);
+        bibliotecaApp = new BibliotecaApp(printStream, menu);
     }
 
     @Test
