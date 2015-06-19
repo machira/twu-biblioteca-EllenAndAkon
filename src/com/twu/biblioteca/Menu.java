@@ -17,8 +17,9 @@ public class Menu {
         this.printStream = printStream;
         this.biblioteca = biblioteca;
         this.reader = reader;
-        this.stillAlive = true;
+        stillAlive = true;
     }
+
 
     public boolean isStillAlive() {
         return stillAlive;

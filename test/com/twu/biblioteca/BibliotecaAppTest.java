@@ -29,7 +29,7 @@ public class BibliotecaAppTest {
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
         books = new ArrayList<Book>();
-//        biblioteca = mock(Biblioteca.class);
+        biblioteca = mock(Biblioteca.class);
         menu = mock(Menu.class);
         when(reader.readLine()).thenReturn("list books");
         bibliotecaApp = new BibliotecaApp(printStream, menu);
@@ -38,16 +38,14 @@ public class BibliotecaAppTest {
     @Test
     public void testWelcomeMessagePrints()  {
         bibliotecaApp.start();
-
         verify(printStream).println("Welcome to Biblioteca!");
     }
 
     @Test
     public void shouldDisplayMenuOnStart(){
-        when(menu.isStillAlive()).thenReturn(true);
         bibliotecaApp.start();
-
-        verify(menu).displayMenu();
+        when(menu.isStillAlive()).thenReturn(true,false);
+        verify(printStream).println(anyString());
     }
 
     @Test
