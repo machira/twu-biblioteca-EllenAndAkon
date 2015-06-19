@@ -36,7 +36,7 @@ public class Biblioteca {
         return true;
     }
 
-    public boolean checkout(String bookTitle){
+    public boolean checkoutBookWithTitle(String bookTitle){
         for(Book book: books){
             if(book.name().equalsIgnoreCase(bookTitle)){
                 return checkout(book);
@@ -49,7 +49,7 @@ public class Biblioteca {
         return book.checkIn();
     }
 
-    public boolean returnBook(String bookTitle) {
+    public boolean returnBookWithTitle(String bookTitle) {
         for (Book book : books) {
             if (book.name().equalsIgnoreCase(bookTitle)) {
                 return returnBook(book);

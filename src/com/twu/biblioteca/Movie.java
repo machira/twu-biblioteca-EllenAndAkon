@@ -19,7 +19,7 @@ public class Movie implements BorrowableItem {
 
 
     public String toString() {
-        return String.format("%20s %20s %20s %20s\n", name, year, director, movieRating);
+        return String.format("%-20s %-20d %-20s %-20d\n", name, year, director, movieRating);
     }
 
     boolean checkedOut;

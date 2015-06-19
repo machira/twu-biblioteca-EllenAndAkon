@@ -29,7 +29,7 @@ public class Menu {
         printStream.println("MAIN MENU");
         printStream.println("- List Books");
         printStream.println("- List Movies");
-        printStream.println("- Checkout [book name]");
+        printStream.println("- Checkout book [name]");
         printStream.println("- Return [book name]");
         printStream.println("- Quit");
 
@@ -51,7 +51,7 @@ public class Menu {
         }else if(selection.contains("list movies")){
             biblioteca.listMovies();
         } else if (selection.contains("checkout")){
-            boolean checkout = biblioteca.checkout(selection.replace("checkout","").trim());
+            boolean checkout = biblioteca.checkoutBookWithTitle(selection.replace("checkout", "").trim());
             if(checkout) {
                 printStream.println("Success! Enjoy your book.");
             }else{
@@ -59,7 +59,7 @@ public class Menu {
             }
         }
         else if (selection.contains("return")) {
-            boolean bool = biblioteca.returnBook(selection.replace("return","").trim());
+            boolean bool = biblioteca.returnBookWithTitle(selection.replace("return", "").trim());
             if(bool){
                 printStream.println("You have successfully returned this book");
             }else{

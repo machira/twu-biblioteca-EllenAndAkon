@@ -82,25 +82,25 @@ public class MenuTest {
     @Test
     public void shouldReturnBookWithGivenTitle(){
         menu.selectOption("return " + bookTitle);
-        verify(biblioteca).returnBook(bookTitle.toLowerCase());
+        verify(biblioteca).returnBookWithTitle(bookTitle.toLowerCase());
     }
 
     @Test
     public void shouldCheckoutBookWithGivenTitle(){
         menu.selectOption("checKout " + bookTitle);
-        verify(biblioteca).checkout(bookTitle.toLowerCase());
+        verify(biblioteca).checkoutBookWithTitle(bookTitle.toLowerCase());
     }
 
     @Test
     public void shouldLetUserKnowWhenCheckoutFails(){
-        when(biblioteca.checkout(bookTitle)).thenReturn(false);
+        when(biblioteca.checkoutBookWithTitle(bookTitle)).thenReturn(false);
         menu.selectOption("checKout " + bookTitle);
         verify(printStream).println("Could not check out book with that name.");
     }
 
     @Test
     public void shouldLetUserKnowWhenCheckoutIsSuccessful(){
-        when(biblioteca.checkout(bookTitle.toLowerCase())).thenReturn(true);
+        when(biblioteca.checkoutBookWithTitle(bookTitle.toLowerCase())).thenReturn(true);
         menu.selectOption("checKout " + bookTitle);
         verify(printStream).println(contains("Success"));
     }
@@ -113,14 +113,14 @@ public class MenuTest {
 
     @Test
     public void shouldLetUserKnowReturnisSuccessful(){
-        when(biblioteca.returnBook(bookTitle.toLowerCase())).thenReturn(true);
+        when(biblioteca.returnBookWithTitle(bookTitle.toLowerCase())).thenReturn(true);
         menu.selectOption("return " + bookTitle);
         verify(printStream).println(contains("success"));
     }
 
     @Test
     public void shouldLetUserKnowReturnisUnsuccessful(){
-        when(biblioteca.returnBook(bookTitle.toLowerCase())).thenReturn(false);
+        when(biblioteca.returnBookWithTitle(bookTitle.toLowerCase())).thenReturn(false);
         menu.selectOption("return " + bookTitle);
         verify(printStream).println(contains("not return"));
     }

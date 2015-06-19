@@ -28,7 +28,7 @@ public class BookTest {
     @Test
     public void shouldPrintDetails() {
         String string = book.toString();
-        assertEquals("          Book Title               Author                 2000\n",string);
+        assertEquals("Book Title           Author               2000                \n",string);
     }
 
     @Test

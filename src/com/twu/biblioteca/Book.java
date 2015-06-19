@@ -16,7 +16,7 @@ public class Book implements BorrowableItem {
 
 
     public String toString() {
-        return String.format("%20s %20s %20s\n", name, author, yearPublished);
+        return String.format("%-20s %-20s %-20s\n", name, author, yearPublished);
     }
 
     boolean checkedOut;
