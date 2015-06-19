@@ -68,6 +68,18 @@ public class MenuTest {
     }
 
     @Test
+    public void shouldIncludeListMoviesInMenuOption(){
+        menu.displayMenu();
+        verify(printStream).println(contains("Movies"));
+    }
+
+    @Test
+    public void shouldListMoviesWhenOptionSelected(){
+        menu.selectOption("list Movies");
+        verify(biblioteca).listMovies();
+    }
+
+    @Test
     public void shouldReturnBookWithGivenTitle(){
         menu.selectOption("return " + bookTitle);
         verify(biblioteca).returnBook(bookTitle.toLowerCase());
@@ -83,7 +95,7 @@ public class MenuTest {
     public void shouldLetUserKnowWhenCheckoutFails(){
         when(biblioteca.checkout(bookTitle)).thenReturn(false);
         menu.selectOption("checKout " + bookTitle);
-        verify(printStream).println("Could not check out book with that title.");
+        verify(printStream).println("Could not check out book with that name.");
     }
 
     @Test

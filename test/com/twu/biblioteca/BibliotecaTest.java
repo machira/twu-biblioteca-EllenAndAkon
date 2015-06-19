@@ -1,14 +1,10 @@
 package com.twu.biblioteca;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,27 +20,40 @@ public class BibliotecaTest {
     private PrintStream printStream;
     private Biblioteca biblioteca;
     private List<Book> books;
+    private List<Movie> movies;
     private Book book1, book2, book3;
+    private Movie movie1, movie2, movie3;
     private BufferedReader reader;
 
     @Before
     public void setUp() {
+        movies = new ArrayList<Movie>();
         printStream = mock(PrintStream.class);
         books = new ArrayList<Book>();
         reader = mock(BufferedReader.class);
-        biblioteca = new Biblioteca(printStream, books);
         book1 = mock(Book.class);
-        when(book1.title()).thenReturn("Book 1");
+        when(book1.toString()).thenReturn("Book 1");
         book2 = mock(Book.class);
-        when(book2.title()).thenReturn("Book 2");
+        when(book2.toString()).thenReturn("Book 2");
         book3 = mock(Book.class);
-        when(book3.title()).thenReturn("Book 3");
+        when(book3.toString()).thenReturn("Book 3");
 
+
+        biblioteca = new Biblioteca(printStream, books, movies);
+
+
+        movie1 = mock(Movie.class);
+        movie2 = mock(Movie.class);
+        movie3 = mock(Movie.class);
+        when(movie1.toString()).thenReturn("Movie1");
+        when(movie2.toString()).thenReturn("Movie2!");
+        when(movie3.toString()).thenReturn("Movie3-");
     }
 
 
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
+        Biblioteca biblioteca = new Biblioteca(printStream,new ArrayList<Book>(),new ArrayList<Movie>());
         biblioteca.listBooks();
 
         verify(printStream).println("");
@@ -54,20 +63,33 @@ public class BibliotecaTest {
     public void shouldPrintOneBookWhenThereIsOneBook() {
         books.add(book1);
         biblioteca.listBooks();
-
-        verify(printStream).println(anyString());
+        verify(printStream).println("Book 1");
     }
 
     @Test
     public void shouldPrintAllBooksWhenThereAreMoreThanOneBook() {
+
         books.add(book1);
         books.add(book2);
         books.add(book3);
         biblioteca.listBooks();
 
-        verify(printStream).println(anyString());
-        verify(printStream).println(anyString());
-        verify(printStream).println(anyString());
+        verify(printStream).println("Book 1");
+        verify(printStream).println("Book 2");
+        verify(printStream).println("Book 3");
+    }
+
+    @Test
+    public void shouldPrintAllMoviesWhenThereIsMoreThanOneMovie(){
+
+        movies.add(movie1);
+        movies.add(movie2);
+        movies.add(movie3);
+        biblioteca.listMovies();
+
+        verify(printStream).println("Movie1");
+        verify(printStream).println("Movie2!");
+        verify(printStream).println("Movie3-");
     }
 
     @Test
@@ -86,7 +108,7 @@ public class BibliotecaTest {
     public void shouldReturnFalseIfBookIsAlreadyCheckedOut() {
         Book book4 = new Book("Akon's thesis", "Akon", "4000");
         books.add(book4);
-        book4.checkOut();
+        book4.checkout();
         assertFalse(biblioteca.checkout(book4));
     }
 

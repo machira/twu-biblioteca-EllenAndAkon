@@ -1,22 +1,25 @@
 package com.twu.biblioteca;
 
 /**
- * Created by egalperi on 6/16/15.
+ * Created by machira on Jun/19/15.
  */
-public class Book implements BorrowableItem {
-    private String author;
-    private String yearPublished;
+public class Movie implements BorrowableItem {
 
-    public Book(String name, String author, String yearPublished) {
+    private int year;
+    private String director;
+    private int movieRating;
+
+    public Movie(String name, int year, String director, int movieRating) {
         this.name = name;
-        this.author = author;
-        this.yearPublished = yearPublished;
+        this.year = year;
+        this.director = director;
+        this.movieRating = movieRating;
         this.checkedOut = false;
     }
 
 
     public String toString() {
-        return String.format("%20s %20s %20s\n", name, author, yearPublished);
+        return String.format("%20s %20s %20s %20s\n", name, year, director, movieRating);
     }
 
     boolean checkedOut;
@@ -34,10 +37,6 @@ public class Book implements BorrowableItem {
             return checkedOut;
         }
         return false;
-    }
-
-    public String name() {
-        return name;
     }
 
     @Override

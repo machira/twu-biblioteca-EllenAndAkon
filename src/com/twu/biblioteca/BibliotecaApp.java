@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BibliotecaApp {
@@ -24,7 +25,9 @@ public class BibliotecaApp {
         books.add(new Book("Harry Potter", "JK Rowling", "2000"));
         books.add(new Book("Twilight", "Stephanie Myers", "2000"));
         books.add(new Book("Native Son", "Richard Wright", "2000"));
-        Biblioteca biblioteca = new Biblioteca(printStream, books);
+        ArrayList<Movie> movies = new ArrayList<>();
+        movies.add(new Movie("Dope", 2015, "Pharrell", 3));
+        Biblioteca biblioteca = new Biblioteca(printStream, books, movies);
 
         Menu menu = new Menu(System.out, biblioteca, reader);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(printStream, menu);
