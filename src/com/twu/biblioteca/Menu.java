@@ -11,16 +11,18 @@ public class Menu {
     private Biblioteca biblioteca;
     private BufferedReader reader;
     private PrintStream printStream;
-    public boolean stillAlive;
+    private boolean stillAlive;
 
     public Menu(PrintStream printStream, Biblioteca biblioteca, BufferedReader reader){
         this.printStream = printStream;
         this.biblioteca = biblioteca;
         this.reader = reader;
-        stillAlive = true;
+        this.stillAlive = true;
     }
 
-
+    public boolean isStillAlive() {
+        return stillAlive;
+    }
 
     public void displayMenu() {
         printStream.println("MAIN MENU");

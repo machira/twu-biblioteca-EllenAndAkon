@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
@@ -39,7 +38,7 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldAskForUserInputWhenMenuIsShown() {
+    public void shouldAskForInputWhenMenuIsShown() {
         menu.displayMenu();
         verify(printStream).println("Enter your selection");
     }
@@ -97,7 +96,7 @@ public class MenuTest {
     @Test
     public void shouldQuitApplicationWhenQuitIsSelected(){
         menu.selectOption("Quit");
-        assertFalse(menu.stillAlive);
+        assertFalse(menu.isStillAlive());
     }
 
     @Test
