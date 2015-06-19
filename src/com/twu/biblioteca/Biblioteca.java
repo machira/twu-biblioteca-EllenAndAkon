@@ -28,31 +28,31 @@ public class Biblioteca {
     }
 
 
-    public boolean checkout(Book book) {
-        if(book.isCheckedOut()){
+    public boolean checkoutBorrowableItem(BorrowableItem borrowableItem) {
+        if(borrowableItem.isCheckedOut()){
             return false;
         }
-        book.isCheckedOut();
+        borrowableItem.isCheckedOut();
         return true;
     }
 
     public boolean checkoutBookWithTitle(String bookTitle){
         for(Book book: books){
             if(book.name().equalsIgnoreCase(bookTitle)){
-                return checkout(book);
+                return checkoutBorrowableItem(book);
             }
         }
         return false;
     }
 
-    public boolean returnBook(Book book) {
-        return book.checkIn();
+    public boolean returnBorrowableItem(BorrowableItem borrowableItem) {
+        return borrowableItem.checkIn();
     }
 
     public boolean returnBookWithTitle(String bookTitle) {
         for (Book book : books) {
             if (book.name().equalsIgnoreCase(bookTitle)) {
-                return returnBook(book);
+                return returnBorrowableItem(book);
             }
         }
         return false;

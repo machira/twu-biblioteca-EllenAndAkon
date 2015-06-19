@@ -98,7 +98,7 @@ public class BibliotecaTest {
         Book book5 = new Book("Conversations on String Theory", "Raymond", "1991");
         books.add(book4);
         books.add(book5);
-        biblioteca.checkout(book4);
+        biblioteca.checkoutBorrowableItem(book4);
         biblioteca.listBooks();
 
         verify(printStream, never()).format(anyString(), eq("Akon's thesis"), eq("Akon"), eq("4000"));
@@ -109,22 +109,22 @@ public class BibliotecaTest {
         Book book4 = new Book("Akon's thesis", "Akon", "4000");
         books.add(book4);
         book4.checkout();
-        assertFalse(biblioteca.checkout(book4));
+        assertFalse(biblioteca.checkoutBorrowableItem(book4));
     }
 
     @Test
     public void shouldReturnTrueIfBookIsNotAlreadyCheckedOut() {
         Book book4 = new Book("Akon's thesis", "Akon", "4000");
         books.add(book4);
-        assertTrue(biblioteca.checkout(book4));
+        assertTrue(biblioteca.checkoutBorrowableItem(book4));
     }
 
     @Test
     public void shouldBeAbleToReturnBooks(){
         when(book1.checkIn()).thenReturn(true);
         when(book2.checkIn()).thenReturn(false);
-        assertEquals(biblioteca.returnBook(book1), true);
-        assertFalse(biblioteca.returnBook(book2));
+        assertEquals(biblioteca.returnBorrowableItem(book1), true);
+        assertFalse(biblioteca.returnBorrowableItem(book2));
     }
 
 }
