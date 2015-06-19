@@ -1,8 +1,12 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Commands.Command;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by angoh on 6/17/15.
@@ -46,6 +50,10 @@ public class Menu {
 
     public void selectOption(String selection) {
         selection = selection.toLowerCase();
+
+        Map<String, Command> commandMap = new HashMap<>();
+
+        commandMap.get(selection);
         if (selection.contains("list books")) {
             biblioteca.listBooks();
         }else if(selection.contains("list movies")){

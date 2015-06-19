@@ -91,6 +91,18 @@ public class MenuTest {
         verify(biblioteca).checkoutBookWithTitle(bookTitle.toLowerCase());
     }
 
+//    @Test
+//    public void shouldReturnMovieWithGivenTitle(){
+//        menu.selectOption("return " + bookTitle);
+//        verify(biblioteca).returnBookWithTitle(bookTitle.toLowerCase());
+//    }
+
+//    @Test
+//    public void shouldCheckoutMovieWithGivenTitle(){
+//        menu.selectOption("checKout " + bookTitle);
+//        verify(biblioteca).checkoutBookWithTitle(bookTitle.toLowerCase());
+//    }
+
     @Test
     public void shouldLetUserKnowWhenCheckoutFails(){
         when(biblioteca.checkoutBookWithTitle(bookTitle)).thenReturn(false);
