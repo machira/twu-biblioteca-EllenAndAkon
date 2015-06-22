@@ -36,13 +36,12 @@ public class Biblioteca {
         return true;
     }
 
-    public boolean checkoutBookWithTitle(String bookTitle){
+    public void checkoutBookWithTitle(String bookTitle){
         for(Book book: books){
             if(book.name().equalsIgnoreCase(bookTitle)){
-                return checkoutBorrowableItem(book);
+                checkoutBorrowableItem(book);
             }
         }
-        return false;
     }
 
     public boolean returnBorrowableItem(BorrowableItem borrowableItem) {
@@ -66,5 +65,14 @@ public class Biblioteca {
             }
         }
         printStream.println("");
+    }
+
+    public boolean isBookAvailable(String bookTitle) {
+        for(Book book: books){
+            if(book.name().equalsIgnoreCase(bookTitle)){
+                return book.isCheckedOut();
+            }
+        }
+        return false;
     }
 }

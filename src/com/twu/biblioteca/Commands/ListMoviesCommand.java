@@ -14,6 +14,7 @@ public class ListMoviesCommand implements Command{
     }
 
     public boolean execute() {
+        biblioteca.listMovies();
         return true;
     }
 }

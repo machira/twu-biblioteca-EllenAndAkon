@@ -59,7 +59,7 @@ public class Menu {
         }else if(selection.contains("list movies")){
             biblioteca.listMovies();
         } else if (selection.contains("checkout")){
-            boolean checkout = biblioteca.checkoutBookWithTitle(selection.replace("checkout", "").trim());
+            boolean checkout = biblioteca.isBookAvailable(selection.replace("checkout", "").trim());
             if(checkout) {
                 printStream.println("Success! Enjoy your book.");
             }else{

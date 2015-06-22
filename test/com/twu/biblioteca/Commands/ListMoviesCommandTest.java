@@ -22,7 +22,7 @@ public class ListMoviesCommandTest {
     }
 
     @Test
-    public void shouldListBooksWhenExecuted() {
+    public void shouldListMoviesWhenExecuted() {
         listMoviesCommand.execute();
 
         verify(biblioteca).listMovies();
